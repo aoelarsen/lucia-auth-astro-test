@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const session = await Astro.locals.auth.validate();
+if (!session) return Astro.redirect('/login', 302);
+---
+
+<Layout title='Lucia+Astro=test'>
+    <main>
+        <h1>Profile</h1>
+        <p>User id: {session.user.userId}</p>
+        <p>Username: {session.user.username}</p>
+        <form method='post' action='/logout'>
+            <input type='submit' value='Sign out' />
+        </form>
+    </main>
+</Layout>
